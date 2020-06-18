@@ -91,23 +91,6 @@ def generate_text(model, start_string, temperature, length):
     return (start_string + ''.join(text_generated))
 
 
-# Create your views here.
-
-
-def about_page(request):
-    return render(request, 'about.html')
-
-
-def view_results(request):
-    # # Submit prediction and show all
-    data = {"dataset": GeneratedLyrics.objects.all()}
-    return render(request, "results.html", data)
-
-
-def kendrick(request):
-    return render(request, 'kendrick.html')
-
-
 def analyze_review(request):
     if request.POST.get('action') == 'post':
         seed = request.POST.get('seed').rstrip()
@@ -120,3 +103,20 @@ def analyze_review(request):
             lyrics=lyrics, seed=seed, temperature=temperature, length=length)
 
         return JsonResponse({'lyrics': lyrics, 'seed': seed, 'temperature': temperature, 'length': length}, safe=False)
+
+
+# Create your views here.
+
+
+def about_page(request):
+    return render(request, 'kendrick/about.html')
+
+
+def view_results(request):
+    # # Submit prediction and show all
+    data = {"dataset": GeneratedLyrics.objects.all()}
+    return render(request, "kendrick/results.html", data)
+
+
+def main_page(request):
+    return render(request, 'kendrick/home.html')

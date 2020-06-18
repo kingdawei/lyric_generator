@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "kendrick/base.html" %}
 {% load static %}
 
 {% block main %}
@@ -47,7 +47,7 @@
       <h1 class="text">Kendrick Lamar Lyric Generator</h1>
 
       <p> WARNING: GENERATED LYRICS WILL LIKELY CONTAIN EXPLETIVES.</p>
-      <img src = "{% static '/images/kendrick.png' %}" > <br><br>
+      <img src = "{% static 'kendrick/images/kendrick.png' %}" > <br><br>
 
       <form action="" id="post-form">
         {% csrf_token %}
@@ -106,7 +106,7 @@
         document.getElementById("seed_id").innerHTML = json["seed"];
         document.getElementById("temperature_id").innerHTML = json["temperature"];
         document.getElementById("length_id").innerHTML = json["length"];
-        document.getElementById("exampleModalLabel").innerHTML = " ";
+        document.getElementById("exampleModalLabel").innerHTML = "";
       },
       error: function (xhr, errmsg, err) {
         console.log("ERROR");
@@ -119,6 +119,8 @@
       document.getElementById("seed_id").innerHTML = "";
       document.getElementById("temperature_id").innerHTML = "";
       document.getElementById("length_id").innerHTML = "";
+      document.getElementById("exampleModalLabel").innerHTML = "Generating. Please Wait.";
+      document.getElementById("generate").disabled = true;
   });
 
   document.addEventListener("DOMContentLoaded", function (event) {
