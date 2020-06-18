@@ -91,7 +91,7 @@
     e.preventDefault();
     $.ajax({
       type: "POST",
-      url: '{% url "kendrick:request_analysis" %}',
+      url: '{% url "kendrick-request_analysis" %}',
       data: {
         seed: $("#seed").val(),
         temperature: $("#temperature").val(),

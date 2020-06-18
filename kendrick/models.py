@@ -4,7 +4,6 @@ from django.db import models
 
 
 class GeneratedLyrics(models.Model):
-
     lyrics = models.TextField()
     seed = models.CharField(max_length=255)
     length = models.IntegerField()

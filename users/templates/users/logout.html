@@ -1,0 +1,9 @@
+{% extends "kendrick/base.html" %} {% block main %}
+
+<div class="container pt-5">
+  <h2>You have logged out</h2>
+  <small class="text-muted">
+    <a href="{% url 'login' %}">Login</a>
+  </small>
+</div>
+{% endblock %}
