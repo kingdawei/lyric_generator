@@ -1,0 +1,21 @@
+{% extends "base.html" %} 
+
+{% block main %}
+<br>
+
+<div class="container pt-5">
+Data Set used:<br>
+Corpus of lyrics of all Kendrick songs from: "Kendrick Lamar" (2009),"Section.80" (2011), "Good Kid: M.A.A.D City" (2012), "To Pimp A Butterfly" (2015), "untitled unmastered." (2016),  "DAMN." (2017), "Black Panther" (2018)    <br><br>
+Model used:<br>
+Recurrent Neural Network using Tensorflow   <br><br>
+
+What is "Temperature"?: <br>
+It is a hyperparameter. Lower temperatures generate more predictable text (closer in resemblance to actual lyrics). <br>
+Higher temperatures generate more creative text, but at the cost of more mistakes such as spelling mistake. 
+ <br><br>
+See <a href="https://github.com/kingdawei">Github</a> for details on how it was implemented. <br><br>
+
+Created by Donghyuk Kim 2020. 
+
+</div>
+{% endblock %}

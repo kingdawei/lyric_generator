@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Generating. Please Wait.</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>Parameters:</h5>
+        <div>Seed: <span id="seed_id"></span></div>
+        <div>Temperature: <span id="temperature_id"></span></div>
+        <div>Number of Characters: <span id="length_id"></span></div>
+        <h5 class="pt-3">Generated Lyrics:</h5>
+        <div id="result_id"></div>
+        <div><p id="lyrics_id"> </p></div>
+      </div>
+      <div class="modal-footer">
+        <button type="close" value="close" class="btn btn-danger" data-dismiss="modal">
+          Close
+        </button>
+        <a class="btn btn-info" href="/results" role="button">View History</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END OF Modal -->
+
+
+<!-- CONTAINER -->
+<div class="container pt-5">
+  <div class="row justify-content-md-center">
+    <div class="col-md-10">
+      <h1 class="text">Kendrick Lamar Lyric Generator</h1>
+
+      <p> WARNING: GENERATED LYRICS WILL LIKELY CONTAIN EXPLETIVES.</p>
+      <img src = "{% static '/images/kendrick.png' %}" > <br><br>
+
+      <form action="" id="post-form">
+        {% csrf_token %}
+
+        <div class="form-group">
+          <label for="review">Seed (Starting Word)</label><br>
+          <input placeholder = "e.g: greatest" type="text" class="form-control" id="seed" required onkeyup= "myFunction()" /><br>
+          <label for ="numbers">Temperature (see About page for explanation)</label><br>
+          <select type="number" class="form-control" id="temperature"  required onkeyup="myFunction()"><br>
+            <option value="0.3">0.3</option>
+            <option value="0.6">0.6</option>
+            <option selected="selected" value="1.0">1.0</option>
+            <option value="1.3">1.3</option>
+            <option value="1.6">1.6</option>
+          </select><br>
+          <label for ="numbers">Number of Characters to Generate (Setting this too high will make load time greater. Try 500 characters first)</label><br />
+          <input type= "number" class="form-control" id="length" required onkeyup="myFunction()" />
+        </div>
+
+        <button
+          type="submit"
+          value="Submit"
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#exampleModal"
+          id="generate"
+        >
+          Generate
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- END OF CONTAINER -->
+
+
+
+
+<script>
+  $(document).on("submit", "#post-form", function (e) {
+    e.preventDefault();
+    $.ajax({
+      type: "POST",
+      url: '{% url "kendrick:request_analysis" %}',
+      data: {
+        seed: $("#seed").val(),
+        temperature: $("#temperature").val(),
+        length: $("#length").val(),
+        csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+        action: "post",
+      },
+      success: function (json) {
+        document.forms["post-form"].reset();
+        json["lyrics"]= json["lyrics"].replace(/(?:\r\n|\r|\n)/g, '<br>');
+        document.getElementById("lyrics_id").innerHTML = json["lyrics"];
+        document.getElementById("seed_id").innerHTML = json["seed"];
+        document.getElementById("temperature_id").innerHTML = json["temperature"];
+        document.getElementById("length_id").innerHTML = json["length"];
+        document.getElementById("exampleModalLabel").innerHTML = " ";
+      },
+      error: function (xhr, errmsg, err) {
+        console.log("ERROR");
+      },
+    });
+  });
+
+  $(document).on("submit", "#post-form", function (e) {
+      document.getElementById("lyrics_id").innerHTML = "";
+      document.getElementById("seed_id").innerHTML = "";
+      document.getElementById("temperature_id").innerHTML = "";
+      document.getElementById("length_id").innerHTML = "";
+  });
+
+  document.addEventListener("DOMContentLoaded", function (event) {
+  document.getElementById("generate").disabled = "true";
+  });
+  function myFunction() {
+    var seedInput = document.getElementById("seed").value;
+    var temperatureInput = document.getElementById("temperature").value;
+    var lengthInput = document.getElementById("length").value;
+
+
+    if (seedInput === "" || temperatureInput === "" || lengthInput === "") {
+      document.getElementById("generate").disabled = true;
+    } else {
+      document.getElementById("generate").disabled = false;
+    }
+  }
+</script>
+
+{% endblock %}
