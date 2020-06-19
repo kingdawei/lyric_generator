@@ -46,12 +46,12 @@
 # 		f.write(lyrics.text)
 
 
-bad_words = ['[', ']', ')', '(']
-with open('kendrick.txt', 'r') as oldfile, open('newfile.txt', 'a') as newfile:
-	for line in oldfile:
-		if not any(bad_word in line for bad_word in bad_words):
-			print(line)
-			newfile.write(line)
+# bad_words = ['[', ']', ')', '(']
+# with open('kendrick.txt', 'r') as oldfile, open('newfile.txt', 'a') as newfile:
+# 	for line in oldfile:
+# 		if not any(bad_word in line for bad_word in bad_words):
+# 			print(line)
+# 			newfile.write(line)
 
 # output = ""
 # print(d)

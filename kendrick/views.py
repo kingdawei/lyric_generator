@@ -6,6 +6,7 @@ import os
 import tensorflow as tf
 import time
 import numpy as np
+from profanity_filter import ProfanityFilter
 tf.enable_eager_execution()
 
 
@@ -96,8 +97,15 @@ def analyze_review(request):
         seed = request.POST.get('seed').rstrip()
         temperature = request.POST.get('temperature').rstrip()
         length = request.POST.get('length').rstrip()
+        filter_on = request.POST.get('filter')
+
         lyrics = generate_text(model, start_string=seed,
                                temperature=temperature, length=length)
+
+        if filter_on:
+            pf = ProfanityFilter()
+            lyrics = pf.censor(lyrics)
+
         if request.user.is_authenticated:
             GeneratedLyrics.objects.create(
                 lyrics=lyrics, seed=seed, temperature=temperature, length=length, author=request.user)

@@ -66,7 +66,7 @@
           <label for ="numbers" max=1000>Number of Characters to Generate (Higher value increases load time)</label><br />
           <input type= "number" class="form-control" id="length" required onkeyup="myFunction()" /><br/>
           <label for ="filter">Filter Profanity:  </label>
-          <input type="checkbox" id="filter"  />
+          <input type="checkbox" checked id="filter"  />
         </div>
 
         <button
@@ -98,6 +98,8 @@
         seed: $("#seed").val(),
         temperature: $("#temperature").val(),
         length: $("#length").val(),
+        
+        filter: $("#filter").is(':checked'),
         csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
         action: "post",
       },
@@ -108,6 +110,7 @@
         document.getElementById("seed_id").innerHTML = json["seed"];
         document.getElementById("temperature_id").innerHTML = json["temperature"];
         document.getElementById("length_id").innerHTML = json["length"];
+        //document.getElementById("filter").innerHTML = json["filter"];
         document.getElementById("exampleModalLabel").innerHTML = "";
       },
       error: function (xhr, errmsg, err) {
