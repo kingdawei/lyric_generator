@@ -98,24 +98,33 @@ def analyze_review(request):
         length = request.POST.get('length').rstrip()
         lyrics = generate_text(model, start_string=seed,
                                temperature=temperature, length=length)
-
-        GeneratedLyrics.objects.create(
-            lyrics=lyrics, seed=seed, temperature=temperature, length=length)
+        if request.user.is_authenticated:
+            GeneratedLyrics.objects.create(
+                lyrics=lyrics, seed=seed, temperature=temperature, length=length, author=request.user)
 
         return JsonResponse({'lyrics': lyrics, 'seed': seed, 'temperature': temperature, 'length': length}, safe=False)
+
+
+# <---------------------------------------->
 
 
 # Create your views here.
 
 
 def about_page(request):
+
     return render(request, 'kendrick/about.html')
 
 
 def view_results(request):
     # # Submit prediction and show all
-    data = {"dataset": GeneratedLyrics.objects.all()}
-    return render(request, "kendrick/results.html", data)
+    if request.user.is_authenticated:
+        data = {"dataset": GeneratedLyrics.objects.filter(
+            author=request.user.id)}
+        #data = {"dataset": GeneratedLyrics.objects.all()}
+        return render(request, "kendrick/results.html", data)
+    else:
+        return render(request, 'kendrick/results_need_login.html')
 
 
 def main_page(request):

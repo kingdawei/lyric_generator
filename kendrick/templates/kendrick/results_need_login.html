@@ -1,0 +1,24 @@
+{% extends "kendrick/base.html" %}
+
+{% block main %}
+    <div class="container pt-5 pull-right">
+        <div class="row">
+
+        <h4>You Need to Be Logged in to Save/View Generated Lyrics: <a href="{% url 'login' %}">Login</a></h4>
+
+            <table class="table">
+                <thead>
+                <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Seed</th>
+                <th scope="col">Temperature</th>
+                <th scope="col">Length</th>
+                <th scope="col">Lyrics</th>
+
+
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+{% endblock %}
