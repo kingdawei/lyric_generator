@@ -9,7 +9,7 @@
             <table class="table">
                 <thead>
                 <tr>
-                <th scope="col">ID</th>
+               
                 <th scope="col">Seed</th>
                 <th scope="col">Temperature</th>
                 <th scope="col">Length</th>
@@ -21,11 +21,10 @@
                 <tbody>
                 {% for data in dataset %}
                     <tr>
-                    <th scope="row">{{ data.id }}</th>
                     <td>{{ data.seed }}</td>
                     <td>{{ data.temperature }}</td>
                     <td>{{ data.length }}</td>
-                    <td>{{ data.lyrics}}</td>
+                    <td><p>{{ data.lyrics}}</p></td>
                     </tr>
                 {% endfor %}
 
