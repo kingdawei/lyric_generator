@@ -7,3 +7,4 @@ en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_
 profanity-filter==1.3.3
 tensorflow==1.13.1
 gunicorn==20.0.4
+django-heroku==0.3.1
