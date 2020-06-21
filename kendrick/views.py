@@ -14,6 +14,7 @@ path_to_file = "kendrick/lyrics.txt"
 text = open(path_to_file, 'rb').read().decode(encoding='utf-8')
 vocab = sorted(set(text))  # unique characters
 
+print(text[0:100])
 # mapping from unique characters to indices
 char2idx = {u: i for i, u in enumerate(vocab)}
 # for indexing
@@ -98,10 +99,11 @@ def analyze_review(request):
         temperature = request.POST.get('temperature').rstrip()
         length = request.POST.get('length').rstrip()
         filter_on = request.POST.get('filter')
+        print(seed)
 
         lyrics = generate_text(model, start_string=seed,
                                temperature=temperature, length=length)
-
+        print(lyrics)
         if filter_on:
             pf = ProfanityFilter()
             lyrics = pf.censor(lyrics)
