@@ -3,7 +3,7 @@ boto3==1.14.7
 Django==3.0.7
 django-crispy-forms==1.9.1
 django-storages==1.9.1
-en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.3.0/en_core_web_sm-2.3.0.tar.gz
+en @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.3.0/en_core_web_sm-2.3.0.tar.gz
 profanity-filter==1.3.3
 tensorflow==1.13.1
 gunicorn==20.0.4
