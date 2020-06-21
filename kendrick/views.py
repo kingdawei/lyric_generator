@@ -10,7 +10,7 @@ from profanity_filter import ProfanityFilter
 tf.enable_eager_execution()
 
 
-path_to_file = "/Users/david/Desktop/django_ml_projects/lyric_gen/kendrick/lyrics.txt"
+path_to_file = "kendrick/lyrics.txt"
 text = open(path_to_file, 'rb').read().decode(encoding='utf-8')
 vocab = sorted(set(text))  # unique characters
 
@@ -54,7 +54,7 @@ def loss(labels, logits):
     return tf.keras.losses.sparse_categorical_crossentropy(labels, logits, from_logits=True)
 
 
-checkpoint_dir = './training_checkpoints'
+checkpoint_dir = 'kendrick/training_checkpoints'
 checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt_{epoch}")
 checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
     filepath=checkpoint_prefix,
@@ -63,7 +63,7 @@ checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
 
 model = build_model(vocab_size, embedding_dim, rnn_units, batch_size=1)
 model.load_weights(
-    '/Users/david/Desktop/django_ml_projects/lyric_gen/kendrick/training_checkpoints/ckpt_50')
+    'kendrick/training_checkpoints/ckpt_50')
 
 # model.load_weights(tf.train.latest_checkpoint(checkpoint_dir))
 model.build(tf.TensorShape([1, None]))
