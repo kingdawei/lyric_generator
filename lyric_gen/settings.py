@@ -25,7 +25,7 @@ SECRET_KEY = 'pzxry5jbz=v1#7g$#z)e40n(bymhxa#@%$h_smt7!zj13vh53r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['lyricgenerate.herokuapp.com']
 
 
 # Application definition
