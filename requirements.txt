@@ -30,8 +30,7 @@ redis==3.5.3
 requests==2.24.0
 ruamel.yaml==0.15.100
 spacy==2.3.0
-srsly==1.0.2
-thinc==7.4.1
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.3.0/en_core_web_sm-2.3.0.tar.gzthinc==7.4.1
 tomlkit==0.5.11
 tqdm==4.46.1
 urllib3==1.25.9

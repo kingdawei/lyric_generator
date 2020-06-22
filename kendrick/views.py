@@ -7,6 +7,8 @@ import tensorflow as tf
 import time
 import numpy as np
 from profanity_filter import ProfanityFilter
+import spacy
+import en_core_web_md
 tf.enable_eager_execution()
 
 
